@@ -11,9 +11,18 @@ import (
 
 var tgToken = mauflag.MakeFull("t", "telegram", "The Telegram bot token to use", "").String()
 var slackToken = mauflag.MakeFull("s", "slack", "The Slack bot token to use", "").String()
+var wantHelp, _ = mauflag.MakeHelpFlag()
 
 func main() {
+	mauflag.SetHelpTitles(
+		"A simple maubot example that replies with a nice GIF when it receives the word \"jesari\" (duct tape in Finnish slang)",
+		"jesaribot [-t telegramToken] [-s slackToken]")
 	mauflag.Parse()
+	if *wantHelp {
+		mauflag.PrintHelp()
+		return
+	}
+
 	bot := maubot.Create()
 
 	if tgToken != nil && len(*tgToken) > 0 {
