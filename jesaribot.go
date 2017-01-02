@@ -23,7 +23,7 @@ func main() {
 		return
 	}
 
-	bot := maubot.Create()
+	bot := maubot.New()
 
 	if tgToken != nil && len(*tgToken) > 0 {
 		tg, err := telegram.New(*tgToken)
@@ -51,7 +51,7 @@ func main() {
 		}
 	}
 
-	for message := range bot.Messages {
+	for message := range bot.Messages() {
 		if strings.Contains(strings.ToLower(message.Text()), "jesari") {
 			message.ReplyWithRef("https://i.imgur.com/BftYhcU.gif")
 		}
